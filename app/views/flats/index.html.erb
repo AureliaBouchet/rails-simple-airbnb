@@ -1,0 +1,46 @@
+<div class="index-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://images.pexels.com/photos/9044/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');">
+<div><h1>All our flats</h1></div>
+</div>
+<p>You searched for : </p>
+<p>We found flats out of on our website </p>
+
+
+<div class="card-container">
+
+  <% @flats.each do |flat| %>
+    <div class="flat-card">
+
+      <div class="card-content text-center text-justify">
+        <div class="card-title">
+          <h2><%= flat.name %></h2>
+        </div>
+        <div class="card-description">
+          <% if flat.description.length < 70 %>
+            <p><%= flat.description%> </p>
+        <% else %>
+          <p><%= flat.description[0..70]%> [...] </p>
+        <%end  %>
+
+        </div>
+      </div>
+      <div class="card-other-content">
+        <div class="card-img">
+          <img src=<%= flat.picture_url %> alt="" class="flat-img">
+        </div>
+        <div class="card-infos">
+          <p><i class="fas fa-users"></i> <%= flat.number_of_guests %></p>
+          <p><i class="fas fa-euro-sign"></i> <%= flat.price_per_night %></p>
+        </div>
+        </div>
+
+      <div class="card-links">
+         <%= link_to "More info", flat_path(flat), class: "btn btn-info" %>
+        <%= link_to "Edit", edit_flat_path(flat), class: "btn btn-primary" %>
+        <%= link_to "Remove", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+      </div>
+
+    </div>
+  <%end %>
+
+</div>
+
